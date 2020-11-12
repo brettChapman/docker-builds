@@ -1,4 +1,4 @@
-#docker build -t local/get_homologues .
+docker build -t local/get_homologues .
 
 #If intending to run only on a local machine using multiple threads, then simply create a singularity sif image and comment out the remaining docker commands to copy over the /get_homologues folder.
 singularity build get_homologues.sif docker-daemon://local/get_homologues:latest
