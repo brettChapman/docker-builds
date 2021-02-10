@@ -1,2 +1,2 @@
-#singularity pull vg.sif docker://quay.io/vgteam/vg:v1.27.0
-singularity pull vg_1.21.0.sif docker://quay.io/vgteam/vg:v1.21.0
+singularity build vg.sif docker://quay.io/vgteam/vg:v1.28.0
+#singularity build vg_1.21.0.sif docker://quay.io/vgteam/vg:v1.21.0
