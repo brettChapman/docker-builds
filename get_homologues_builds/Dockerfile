@@ -1,11 +1,9 @@
-FROM csicunam/get_homologues:latest AS GETHOMOLOGUES
-
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 FROM rstudio/r-base:3.6.3-bionic
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
-COPY --from=GETHOMOLOGUES / .
+#COPY --from=GETHOMOLOGUES / .
 
 # Install dependencies from repos: GD for graphics, libidn11 for BLAST+
 RUN apt-get update && apt-get install -y \
@@ -23,6 +21,8 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 RUN curl -L http://cpanmin.us | perl - App::cpanminus
 RUN cpanm Inline::C Inline::CPP
+
+RUN git clone https://github.com/eead-csic-compbio/get_homologues.git
 
 RUN cd get_homologues && echo "yes y | perl install.pl" > install.sh
 

@@ -34,9 +34,9 @@ RUN cpanm --notest BioPerl \
   File::Which
 
 # install mash
-RUN wget https://github.com/marbl/Mash/releases/download/v2.2/mash-Linux64-v2.2.tar && \
-  tar -xvf mash-Linux64-v2.2.tar && \
-  rm -rf mash-Linux64-v2.2.tar
+RUN wget https://github.com/marbl/Mash/releases/download/v2.3/mash-Linux64-v2.3.tar && \
+  tar -xvf mash-Linux64-v2.3.tar && \
+  rm -rf mash-Linux64-v2.3.tar
 
 # install quicktree
 RUN wget https://github.com/khowe/quicktree/archive/v2.5.tar.gz && \
@@ -46,17 +46,17 @@ RUN wget https://github.com/khowe/quicktree/archive/v2.5.tar.gz && \
   make quicktree
 
 # add mash and quicktree to the path to allow mashtree to pass tests
-ENV PATH="${PATH}:/mash-Linux64-v2.2:/quicktree-2.5"
+ENV PATH="${PATH}:/mash-Linux64-v2.3:/quicktree-2.5"
 
 # install mashtree
-RUN wget https://github.com/lskatz/mashtree/archive/v1.1.2.tar.gz && \
-  tar -xvf v1.1.2.tar.gz && \
-  rm -rf v1.1.2.tar.gz && \
-  cd mashtree-1.1.2/ && \
+RUN wget https://github.com/lskatz/mashtree/archive/v1.2.2.tar.gz && \
+  tar -xvf v1.2.2.tar.gz && \
+  rm -rf v1.2.2.tar.gz && \
+  cd mashtree-1.2.2/ && \
   perl Makefile.PL && \
   mkdir /data
 
-ENV PATH="${PATH}:/mashtree-1.1.2/bin"
+ENV PATH="${PATH}:/mashtree-1.2.2/bin"
 
 # set perl locale settings
 ENV LC_ALL=C

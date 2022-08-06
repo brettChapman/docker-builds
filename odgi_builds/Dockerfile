@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
   python3-distutils \
   python3-dev \
   libjemalloc-dev \
+  pkg-config \
+  cmake-data \
   git \
   && rm -rf /var/lib/apt/lists/*
 

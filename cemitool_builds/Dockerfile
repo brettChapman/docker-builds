@@ -2,15 +2,18 @@ FROM ubuntu:21.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y dialog apt-utils git r-base r-base-dev \
-	libssl-dev libssh2-1-dev pandoc libcurl4 libcurl4-openssl-dev libxml2-dev libudunits2-dev \
-	&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update -yqq
+RUN apt-get install -yqq --no-install-recommends software-properties-common dirmngr wget
+RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
 
-RUN git clone --recursive https://github.com/csbl-usp/CEMiTool.git
+RUN apt-get update && apt-get install -y dialog apt-utils git systemd tzdata r-base r-base-dev \
+        libssl-dev libssh2-1-dev pandoc libcurl4 libcurl4-openssl-dev libxml2-dev libudunits2-dev \
+        && rm -rf /var/lib/apt/lists/*
 
-#WORKDIR /usr/local/bin
+env TZ UTC
 
-#RUN cp /CEMiTool/R/*.R .
+RUN git clone --recursive https://github.com/brettChapman/CEMiTool.git
 
 WORKDIR /CEMiTool
 
@@ -18,14 +21,6 @@ RUN R -e "install.packages('docopt')"
 
 RUN /usr/bin/Rscript docker/install-deps.R 
 
-#RUN R -e "install.packages('docopt')"
-
-#RUN R -e "install.packages('devtools')"
-
 RUN R -e "library(devtools)"
 
-RUN R -e "devtools::install_github('csbl-usp/CEMiTool')"
-
-#RUN R -e "install.packages(c('BiocManager', 'httr', 'europepmc'))"
-
-#RUN R -e "BiocManager::install('CEMiTool')"
+RUN R -e "devtools::install_github('brettChapman/CEMiTool')"
