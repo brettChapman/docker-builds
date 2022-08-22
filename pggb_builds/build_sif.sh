@@ -1,6 +1,5 @@
-#docker build -t local/pggb .
-#singularity build pggb.sif docker-daemon://local/pggb:latest
+#singularity build pggb_v0.4.1.sif docker://ghcr.io/pangenome/pggb:latest
 
-singularity build pggb_v0.4.1.sif docker://ghcr.io/pangenome/pggb:latest
-#20201130143807d2fc2a
-#latest
+#build container for PGGB supporting R scripts
+docker build -t local/pggb_rscripts .
+singularity build pggb_rscripts.sif docker-daemon://local/pggb_rscripts:latest
