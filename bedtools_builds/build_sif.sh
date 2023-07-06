@@ -1,1 +1,2 @@
-singularity build bedtools.sif docker://pegi3s/bedtools:latest
+docker build -t local/bedtools .
+singularity build bedtools.sif docker-daemon://local/bedtools:latest
