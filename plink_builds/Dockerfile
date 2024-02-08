@@ -15,12 +15,12 @@ RUN apt-get update \
         python-dev \
         && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr/local
+WORKDIR /usr/local/bin/
 
 RUN wget http://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20200725.zip && \
     unzip plink2_linux_x86_64_20200725.zip && \
     rm -f plink2_linux_x86_64_20200725.zip
 
-ENV PATH=/usr/local/:$PATH
+ENV PATH=/usr/local/bin/:$PATH
 
-WORKDIR /home
+WORKDIR /

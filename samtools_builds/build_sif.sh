@@ -1,1 +1,3 @@
-singularity pull samtools.sif docker://biocontainers/samtools:v1.9-4-deb_cv1
+#singularity build samtools.sif docker://biocontainers/samtools:1.19--h50ea8bc_0
+
+singularity build samtools.sif docker://mgibio/samtools:1.16.1

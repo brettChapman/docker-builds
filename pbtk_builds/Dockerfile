@@ -1,13 +1,6 @@
 # build minimap2-coverage
 FROM continuumio/miniconda3
 
-### MAINTAINER ###
-MAINTAINER Yoshinori Fukasawa <yoshinori.fukasawa@kaust.edu.sa>
-### LABELS ###
-LABEL base_image="miniconda3"
-LABEL software="LongQC docker"
-LABEL software.version="1.2"
-
 ### Basic dependency ###
 RUN apt-get clean all && \
     apt-get update && \
@@ -20,17 +13,6 @@ RUN apt-get clean all && \
     apt-get clean && \
     apt-get purge
 
-### LongQC installation ###
-ADD https://api.github.com/repos/yfukasawa/longqc/git/refs/heads/minimap2_update version.json
-RUN git clone https://github.com/yfukasawa/LongQC.git
-RUN cd LongQC/minimap2-coverage && make
-RUN cd LongQC && \
-    sed -i \
-    -e '1{s;^;#!/opt/conda/bin/python\n;}' \
-    longQC.py && \
-    chmod +x longQC.py
-
-### install LongQC's dependency ###
 RUN conda config --add channels conda-forge && \
     conda config --add channels bioconda && \
     conda install -y \
@@ -43,9 +25,10 @@ RUN conda config --add channels conda-forge && \
     matplotlib'>=2.1.2' \
     scikit-learn && \
     conda install -y -c bioconda \
+    pbtk \
     edlib \
     pysam \
     python-edlib
 
-### Define PATH ###
-ENV PATH="/LongQC:$PATH"
+
+RUN which pbtk
