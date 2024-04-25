@@ -7,6 +7,6 @@
 #docker-daemon://local/vg:latest
 
 #singularity build vg.sif docker://quay.io/vgteam/vg:v1.50.1
-singularity build vg.sif docker://quay.io/vgteam/vg:v1.53.0
+singularity build vg.sif docker://quay.io/vgteam/vg:v1.55.0
 
 #singularity build vg_1.21.0.sif docker://quay.io/vgteam/vg:v1.21.0
